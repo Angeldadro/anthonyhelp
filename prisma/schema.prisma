@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model b_clients {
+  id             String @id @map("_id") @db.Uuid
+  b_name         String
+  b_company_name String
+  phone          String
+}
+
+model contacts {
+  first_name    String?
+  last_name     String?
+  email         String?
+  phone         String?
+  id_user       String
+  id_contact    Int     @id @default(autoincrement())
+  c_nickname    String?
+  c_social      String?
+  type_relation String?
+  me_at         String?
+}
+
+model notas {
+  id_nota        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  titulo_nota    String  @db.VarChar(255)
+  contenido_nota String
+  firma_autor    String  @db.VarChar(255)
+  ruta_imagen    String? @db.VarChar(255)
+  color_nota     String  @db.VarChar(20)
+  etiqueta_unica String  @db.VarChar(255)
+}
